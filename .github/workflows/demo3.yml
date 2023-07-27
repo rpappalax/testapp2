@@ -6,7 +6,7 @@ on:
       - "demo"
 
 jobs:
-  build:
+  recall-cache:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,7 +23,38 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}
           ${{ runner.os }}-build
           ${{ runner.os }}
-
     - name: demo 
-      #if: steps.cache.outputs.cache-hit != 'true'
-      run: python src/__main__.py
+      run: python src/cache_read.py
+
+
+  clear-cache:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Clear cache
+          uses: actions/github-script@v6
+          with:
+            script: |
+              console.log("About to clear")
+              const caches = await github.rest.actions.getActionsCacheList({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              })
+              for (const cache of caches.data.actions_caches) {
+                console.log(cache)
+                github.rest.actions.deleteActionsCacheById({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  cache_id: cache.id,
+                })
+              }
+              console.log("Clear completed")
+  write-cache:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v3
+      with:
+        python-version: 3.9.12
+    - name: demo 
+      run: python src/cache_write.py
