@@ -18,3 +18,8 @@ jobs:
           python-version: "3.8"
       - name: demo 
         run: python src/__main__.py 
+      - name: Archive last version num 
+        uses: actions/upload-artifact@v3
+        with:
+          name: version_last 
+          path: version_last.txt 
