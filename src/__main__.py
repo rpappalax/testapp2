@@ -10,7 +10,7 @@ def version_last_read():
 
 def version_last_write():
     with open(FILENAME, "w") as file:
-        file.write("100.1")
+        file.write("100.2")
 
 
 if __name__ == '__main__':
