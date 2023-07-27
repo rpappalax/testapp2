@@ -1,0 +1,32 @@
+name: demo
+
+on: 
+  push
+    branches:
+      - "demo"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+	python-version: 3.9.5
+
+    - uses: actions/cache@v2
+      env:
+	cache-name: version 
+	with:
+	  key: "${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('version_last.txt') }}"
+	  restore-keys: |
+	    ${{ runner.os }}-build-${{ env.cache-name }}
+	    ${{ runner.os }}-build
+	    ${{ runner.os }}
+	  path: ~
+
+
+    - name: demo 
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: python src/__main__.py
