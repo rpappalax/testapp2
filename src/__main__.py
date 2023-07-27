@@ -1,7 +1,7 @@
 import os
 
 
-FILENAME = 'version_last.txt'
+FILENAME = 'src/version_last.txt'
 
 def version_last_read():
     with open(FILENAME, "r") as file:
