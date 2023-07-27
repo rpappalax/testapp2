@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     name: version-lasest 
     steps:
-      - name: Check out source repository
-        uses: actions/checkout@v2
       - name: Set up Python environment
         uses: actions/setup-python@v1
         with:
