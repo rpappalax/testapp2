@@ -1,0 +1,20 @@
+name: Demo 
+
+on:
+  push:
+    branches:
+      - 'demo'
+
+jobs:
+  flake8-lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: Set up Python environment
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: demo 
+        run: python src/__main__.py 
