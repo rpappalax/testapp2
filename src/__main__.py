@@ -24,6 +24,8 @@ if __name__ == '__main__':
     
     version = version_last_read()
     print(f'LAST VERSION: {version}')
-    version = version_last_write()
+    version_last_write()
+    version = version_last_read()
+    print(f'LAST VERSION (after write): {version}')
     
 
