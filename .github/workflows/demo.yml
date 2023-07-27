@@ -1,5 +1,8 @@
 name: demo 
-on: push
+on:
+  push:
+    branches:
+      - demo 
 
 jobs:
   version-num:
