@@ -19,7 +19,7 @@ jobs:
       env:
         cache-name: version 
         with:
-          key: "${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('version_last.txt') }}"
+        key: "${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('version_last.txt') }}"
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}
             ${{ runner.os }}-build
