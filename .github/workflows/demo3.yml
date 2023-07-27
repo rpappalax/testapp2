@@ -58,3 +58,11 @@ jobs:
         python-version: 3.9.12
     - name: demo 
       run: python src/cache_write.py
+    - uses: actions/cache@v3
+      with:
+        path: src 
+        key: "${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('version_last.txt') }}"
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}
+          ${{ runner.os }}-build
+          ${{ runner.os }}
