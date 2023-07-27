@@ -17,5 +17,6 @@ if __name__ == '__main__':
     
     version = version_last_read()
     print(f'LAST VERSION: {version}')
+    version = version_last_write()
     
 
