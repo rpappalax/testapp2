@@ -16,15 +16,13 @@ jobs:
         python-version: 3.9.5
 
     - uses: actions/cache@v2
-      env:
-        cache-name: version 
-        with:
+      with:
+        path: ~
         key: "${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('version_last.txt') }}"
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}
-            ${{ runner.os }}-build
-           ${{ runner.os }}
-          path: ~
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}
+          ${{ runner.os }}-build
+          ${{ runner.os }}
 
     - name: demo 
       if: steps.cache.outputs.cache-hit != 'true'
