@@ -22,7 +22,7 @@ def version_last_write():
         file.write(formatted_time)
 
 def is_different(vers_a, vers_b):
-    return (vers_a == vers_b)
+    return (vers_a != vers_b)
 
 if __name__ == '__main__':
     
