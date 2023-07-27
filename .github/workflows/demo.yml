@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: '3.10' 
       - name: demo 
-        run: python ./demo.py
+        run: python rpappalax/testapp2/demo.py
