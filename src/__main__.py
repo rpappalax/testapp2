@@ -1,7 +1,21 @@
 import os
 
 
-os.environ["VERSION_NUM_LAST"] = "100.1"
-print(os.environ["VERSION_NUM_LAST"])
-with open("version_last.txt", "w") as file:
-    file.write("100.1")
+FILENAME = 'version_last.txt'
+
+def version_last_read():
+    with open(FILENAME, "r") as file:
+        return file.read()
+
+
+def version_last_write():
+    with open(FILENAME, "w") as file:
+        file.write("100.1")
+
+
+if __name__ == '__main__':
+    
+    version = version_last_read()
+    print(f'LAST VERSION: {version}')
+    
+
