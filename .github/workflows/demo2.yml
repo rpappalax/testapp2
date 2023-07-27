@@ -8,7 +8,7 @@ on:
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
-    name: Lint
+    name: Demo 
     steps:
       - name: Check out source repository
         uses: actions/checkout@v2
@@ -23,3 +23,12 @@ jobs:
         with:
           name: version_last 
           path: version_last.txt 
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: version-artifact
+      - name: Print the final result
+        shell: bash
+        run: |
+          value=`cat version_last-homework.txt`
+          echo The result is $value
