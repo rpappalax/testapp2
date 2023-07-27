@@ -8,18 +8,20 @@ def version_last_read():
     with open(FILENAME, "r") as file:
         return file.read()
 
-
-def BAK_version_last_write():
+"""
+def version_last_write():
     with open(FILENAME, "w") as file:
         file.write("100.2")
+"""
 
 
 def version_last_write():
     import datetime import datetime  
 
-    date_time = datetime.fromtimestamp(time_stamp)
+    current_time = datetime.datetime.now()
+    formatted_time = current_time.strftime('%H:%M:%S')
     with open(FILENAME, "w") as file:
-        file.write(date_time)
+        file.write(formatted_time)
 
 
 if __name__ == '__main__':
