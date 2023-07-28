@@ -15,16 +15,18 @@ jobs:
         with:
           python-version: "3.8"
 
-      - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: version_last
-
       - name: Verify Workflow integrity
         run: |
               #echo "some text" > test/apps/test/test.yml
               #cat test/apps/test/test.yml
               echo "${{ hashFiles('src/version_text.txt') }}"
+
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: version_last
+          path: src
+
 
       - name: cache-read 
         run: python src/cache_read.py 
