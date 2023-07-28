@@ -6,27 +6,35 @@ on:
       - 'demo'
 
 jobs:
-  flake8-lint:
+  version-check:
     runs-on: ubuntu-latest
     name: Demo 
     steps:
-      - name: Check out source repository
-        uses: actions/checkout@v2
       - name: Set up Python environment
         uses: actions/setup-python@v1
         with:
           python-version: "3.8"
+
       - name: Download a single artifact
         uses: actions/download-artifact@v3
         with:
           name: version_last
-      - name: demo 
-        run: python src/__main__.py 
+
+      - name: Verify Workflow integrity
+        run: |
+              #echo "some text" > test/apps/test/test.yml
+              #cat test/apps/test/test.yml
+              echo "${{ hashFiles('src/version_text.txt') }}"
+
+      - name: cache-read 
+        run: python src/cache_read.py 
+
       - name: Print the final result
         shell: bash
         run: |
           value=`cat version_last.txt`
           echo The result is $value
+
       - name: Archive last version num 
         uses: actions/upload-artifact@v3
         with:
