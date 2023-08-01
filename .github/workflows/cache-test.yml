@@ -23,9 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create files 
+        run: touch tmp.txt;  
+        shell: bash
+
       - name: List files 
         continue-on-error: true
-        run: ls -la ~/.npm
+        run: echo "hello" > tmp.txt; cp tmp.txt ~/.npm; ls -la ~/.npm
         shell: bash
 
 
