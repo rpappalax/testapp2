@@ -20,6 +20,10 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
+      - name: Create cache dir 
+        run: mkdir ~/.npm
+        shell: bash
+
       - if: ${{ steps.cache-version.outputs.cache-hit != 'true' }}
         name: Create version file 
         continue-on-error: true
