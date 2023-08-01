@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-        name: List files 
+      - name: List files 
         continue-on-error: true
         run: ls -la ~/.npm
         shell: bash
