@@ -6,32 +6,33 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache node modules
+      - name: Cache release version 
         id: cache-version
         uses: actions/cache@v3
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-release-version
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: ~/version_cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Create cache dir 
-        run: mkdir ~/.npm
+      - if: ${{ steps.cache-version.outputs.cache-hit != 'true' }}
+        name: Create cache dir 
+        run: mkdir ~/version_cache
         shell: bash
 
       - if: ${{ steps.cache-version.outputs.cache-hit != 'true' }}
         name: Create version file 
         continue-on-error: true
-        run: echo "version 99.9" > ~/.npm/tmp.txt
+        run: echo "version 99.9" > ~/version_cache/tmp.txt
         shell: bash
 
       - name: Read cached version
-        run: cat ~/.npm/tmp.txt
+        run: cat ~/version_cache/tmp.txt
         shell: bash
 
 
